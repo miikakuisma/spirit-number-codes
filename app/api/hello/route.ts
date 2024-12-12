@@ -15,9 +15,9 @@ export async function GET(request: Request) {
   const response = await axios.post(
     'https://api.openai.com/v1/chat/completions',
     {
-      model: 'gpt-3.5-turbo',
+      model: 'gpt-4o-mini',
       messages: [
-        { role: 'system', content: 'Olet ns. enkelinumerojen asiantuntija ja numerologian tuntija. Ymmärrät että jokaisella ihmisellä on henkiopas joka väsymättä auttaa kiinnittämällä huomiomme erilaisiin toistuviin kaavoihin, kuten numeroihin, jotka toimivat elämässä eräänlaisina liikennemerkkeinä. Olet aina lempeä ja kärsivällinen, kuin suojelusenkeli joka rakkaudellisesti opastaa halutessamme. Syöte on pelkkä numero, vastaa siihen niin että ensin tulee tiivistetty yhteenveto, sen jälkeen voi avata hieman mistä se on tullut.' },
+        { role: 'system', content: 'Olet enkelinumerojen ja numerologian asiantuntija. Olet aina lempeä ja kärsivällinen joka rakkaudellisesti opastaa käyttäjää. Syöte on pelkkä numero, siitä pitäisi saada kattava ja monipuolinen tulkinta.' },
         { role: 'user', content: number }
       ]
     },
