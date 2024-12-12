@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 
-export async function fetchReading(number: number) {
+export async function fetchReading(number: string) {
   try {
     const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
@@ -16,7 +16,7 @@ export async function fetchReading(number: number) {
         model: 'gpt-4o-mini',
         messages: [
           { role: 'system', content: 'Olet enkelinumerojen ja numerologian asiantuntija. Numerosta toivotaan mahdollisimman kattava ja monipuolinen tulkinta.' },
-          { role: 'user', content: number.toString() }
+          { role: 'user', content: number }
         ]
       },
       {

@@ -1,20 +1,15 @@
 'use client'
-
-import { useState, Suspense } from 'react';
-import Loading from './loading';
-import Reading from './reading';
+import { useRef } from 'react';
+import { ArrowRightIcon } from '@heroicons/react/24/outline';
+import { redirect } from 'next/navigation';
 
 export default function Page() {
-  const [number, setNumber] = useState<number | null>(null);
 
-  let timeout: NodeJS.Timeout;
+  const numberRef = useRef<HTMLInputElement>(null);
 
-  const handleInputNumber = (event: React.FormEvent<HTMLInputElement>) => {
-    const target = event.target as HTMLInputElement;
-    clearTimeout(timeout);
-    timeout = setTimeout(() => {
-      setNumber(parseInt(target.value));
-    }, 300);
+  const handleSubmit = () => {
+    const url = "/number/" + numberRef.current?.value;
+    redirect(url);
   }
 
   return (
@@ -24,13 +19,14 @@ export default function Page() {
       </header>
       <p>Enkelinumerot ovat enkeleiden lähettämiä viestejä, jotka voivat auttaa sinua elämässäsi. Jokaisella numerolla on oma merkityksensä ja viestinsä. Valitse alta haluamasi numero ja lue sen tulkinta.</p>
       <div>
-        <input type="number" placeholder="Syötä numero" onInput={handleInputNumber} />
+        <input type="number" placeholder="Syötä numero" ref={numberRef} onInput={() => console.log(numberRef.current?.value)} />
       </div>
-      {number && <div className="">
-        <Suspense fallback={<Loading />}>
-          <Reading number={number} />
-        </Suspense>
-      </div>}
+      <button
+        className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
+        onClick={handleSubmit}
+      >
+        <span>Go</span> <ArrowRightIcon className="w-5 md:w-6" />
+      </button>
     </main>
   );
 }

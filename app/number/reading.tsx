@@ -1,7 +1,7 @@
 import { fetchReading } from '../data'
 import Markdown from 'react-markdown'
 
-export default async function Reading(props: { number: number }) {
+export default async function Reading(props: { number: string }) {
   const number = props.number
   
   const [markdown] = await Promise.all([
