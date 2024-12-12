@@ -19,7 +19,7 @@ export default function Page() {
       </header>
       <p>Enkelinumerot ovat enkeleiden lähettämiä viestejä, jotka voivat auttaa sinua elämässäsi. Jokaisella numerolla on oma merkityksensä ja viestinsä. Valitse alta haluamasi numero ja lue sen tulkinta.</p>
       <div>
-        <input type="number" placeholder="Syötä numero" ref={numberRef} onInput={() => console.log(numberRef.current?.value)} />
+        <input type="number" placeholder="Syötä numero" ref={numberRef} />
       </div>
       <button
         className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
