@@ -15,7 +15,7 @@ export async function fetchReading(number: string) {
       {
         model: 'gpt-4o-mini',
         messages: [
-          { role: 'system', content: 'Olet enkelinumerojen ja numerologian asiantuntija. Numerosta toivotaan mahdollisimman kattava ja monipuolinen tulkinta.' },
+          { role: 'system', content: 'Give so called angel number reading of the given number' },
           { role: 'user', content: number }
         ]
       },

@@ -15,9 +15,9 @@ export default function Page() {
   return (
     <main>
       <header>
-        <h1>Enkelinumerot</h1>
+        <h1>Spirit Number Codes</h1>
       </header>
-      <p>Enkelinumerot ovat enkeleiden lähettämiä viestejä, jotka voivat auttaa sinua elämässäsi. Jokaisella numerolla on oma merkityksensä ja viestinsä. Valitse alta haluamasi numero ja lue sen tulkinta.</p>
+      <p>Your higher self has ways to make you notice recurring numbers in your environment. This is a form of communication and once you have established the connection and agree on using some tool for number reading, you may be surprised how accurately numbers relate to your current situation.</p>
       <div>
         <input type="number" placeholder="Syötä numero" ref={numberRef} />
       </div>
