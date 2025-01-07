@@ -1,11 +1,29 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 
-// import { useState } from 'react'
-// import { Dialog, DialogPanel } from '@headlessui/react'
-// import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { useState } from 'react';
+import { fetchReading } from './data'
+import Loading from './number/loading';
+import Markdown from 'react-markdown'
 
 export default function Home() {
+  const [loading, setLoading] = useState(false);
+  const [reading, setNumber] = useState<string | null>(null);
+
+  let timer: NodeJS.Timeout | null = null;
+
+  const handleNumberInput = (event: React.FormEvent<HTMLInputElement>) => {
+    if (timer !== null) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout(async () => {
+      const number = (event.target as HTMLInputElement).value
+      console.log(number)
+      setLoading(true)
+      setNumber(await fetchReading(number))
+      setLoading(false)
+    }, 500)
+  }
 
   return (
     <div className="bg-gray-900">
@@ -14,26 +32,30 @@ export default function Home() {
           alt=""
           src="/angel.jpg"
           className="absolute inset-0 -z-10 w-screen h-screen object-cover"
+          style={{
+            opacity: loading || reading ? 0.2 : 1.0,
+            transition: 'opacity 1s ease-in-out'
+          }}
         />
-        {/* <div className="mx-auto max-w-7xl">
-          <div className="absolute bottom-0 left-0 w-screen mx-auto p-10 bg-black bg-opacity-60">
-            <div className="text-center">
-              <h1 className="text-balance text-5xl font-semibold tracking-tight text-white sm:text-5xl">
-                Spirit Number Codes
-              </h1>
-              <p className="mt-8 text-pretty text-lg font-medium text-white sm:text-xl/8">
-                Are you seeing the same number over and over again?
-                It could be a message from the your spirit guides.
-                Find out what it means and how it can help you in your life.
-              </p>
-              <div className="mt-10 flex items-center justify-center gap-x-6">
-                <Link href="/number" className="rounded-md bg-blue-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400">
-                  Get Reading
-                </Link>
-              </div>
+        {loading && <Loading />}
+        {!reading && (
+          <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 mb-4">
+            <input
+              type="number"
+              placeholder="Number"
+              onInput={handleNumberInput}
+              className="p-2 rounded"
+            />
+          </div>
+        )}
+        {reading && (
+          <div className="absolute bottom-0 left-0 mb-4 p-6 overflow-scroll max-h-screen">
+            <div className="prose prose-lg text-white p-8">
+              <Markdown>{reading}</Markdown>
             </div>
           </div>
-        </div> */}
+        )}
+        
       </div>
     </div>
   )
