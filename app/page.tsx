@@ -18,11 +18,10 @@ export default function Home() {
     }
     timer = setTimeout(async () => {
       const number = (event.target as HTMLInputElement).value
-      console.log(number)
       setLoading(true)
       setNumber(await fetchReading(number))
       setLoading(false)
-    }, 500)
+    }, 1500)
   }
 
   return (
@@ -38,12 +37,13 @@ export default function Home() {
           }}
         />
         {loading && <Loading />}
-        {!reading && (
+        {!reading && !loading && (
           <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 mb-4">
             <input
               type="number"
               placeholder="Number"
               onInput={handleNumberInput}
+              autoFocus
               className="p-2 rounded"
             />
           </div>
