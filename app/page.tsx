@@ -28,7 +28,7 @@ export default function Home() {
 
   return (
     <div className="bg-gray-900">
-      <div className="relative isolate overflow-hidden pt-14 h-screen">
+      <div className="relative isolate overflow-hidden h-screen">
         <img
           alt=""
           src="/angel.jpg"
@@ -59,7 +59,7 @@ export default function Home() {
           </div>
         )}
         {reading && (
-          <div className="absolute top-0 left-0 mb-4 p-6 overflow-auto max-h-screen">
+          <div className="mb-4 p-5 pt-10 pb-10 h-full max-h-screen overflow-auto">
             <div className="prose prose-lg text-white p-8">
               <Markdown>{reading}</Markdown>
             </div>
