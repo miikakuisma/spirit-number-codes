@@ -40,13 +40,17 @@ export default function Home() {
         />
         {!reading && (
           <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 mb-4">
-            <Rollnumber
+            {!loading && <Rollnumber
               // defaultValue="147"
               onChange={number => setNumber(number)}
-            />
+            />}
             <div className="flex justify-center mt-4">
               <button
                 className="flex items-center justify-center gap-5 w-[64px] h-[64px] self-start rounded-full bg-gray-900 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-gray-700 md:text-base"
+                style={{
+                  opacity: number !== null ? 1 : 0.5,
+                  pointerEvents: number !== null ? 'auto' : 'none'
+                }}
                 onClick={handleSubmit}
               >
                 {!loading ? <span>Go</span> : <Loading />} 
@@ -58,6 +62,16 @@ export default function Home() {
           <div className="absolute bottom-0 left-0 mb-4 p-6 overflow-auto max-h-screen">
             <div className="prose prose-lg text-white p-8">
               <Markdown>{reading}</Markdown>
+            </div>
+            <div className="flex justify-center mt-4">
+              <button
+                className="flex items-center justify-center gap-5 w-[64px] h-[64px] self-start rounded-full bg-gray-900 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-gray-700 md:text-base"
+                onClick={() => {
+                  getReading(null)
+                }}
+              >
+                {<span>Back</span>} 
+              </button>
             </div>
           </div>
         )}

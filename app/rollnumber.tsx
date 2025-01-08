@@ -52,7 +52,7 @@ export default function Rollnumber(
               if (onChange) {
                 onChange(parseInt(newNumbers.join('')))
               }
-            }, 100)
+            }, 300)
           }
           (angel as HTMLElement).style.filter = `hue-rotate(${numbers[0]}${numbers[1]}${numbers[2]}deg)`
         }
