@@ -1,0 +1,39 @@
+.number-container {
+  max-height: 100px;
+  padding: 15px 4px 15px 4px;
+  overflow-y: scroll;
+  scroll-snap-type: mandatory;
+  scroll-snap-points-y: repeat(3rem);
+  scroll-snap-type: y mandatory;
+  overflow: auto;
+}
+
+.number-container .num {
+  height: 60px;
+  padding: 1.3rem;
+  font-size: 2rem;
+  color: white;
+  text-align: center;
+  display: flex;
+  border-radius: 9px;
+  font-weight: bolder;
+  overflow: hidden;
+  background-color: #333;
+  flex-direction: column;
+  justify-content: center;
+  scroll-snap-align: center;
+  margin: 5px 0;
+}
+
+.number-container::-webkit-scrollbar {
+	width: 0px;
+  height: 4px;
+}
+
+.number-container::-webkit-scrollbar {
+	background: transparent;
+}
+
+.number-container::-webkit-scrollbar-thumb {
+	opacity: 0;
+}
