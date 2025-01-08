@@ -59,7 +59,7 @@ export default function Home() {
           </div>
         )}
         {reading && (
-          <div className="mb-4 p-5 pt-10 pb-10 h-full max-h-screen overflow-auto">
+          <div className="mb-4 p-5 pt-20 pb-10 h-full max-h-screen overflow-auto">
             <div className="prose prose-lg text-white p-8">
               <Markdown>{reading}</Markdown>
             </div>
