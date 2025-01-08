@@ -4,16 +4,14 @@ import { useEffect, useState } from 'react';
 import './rollnumber.css'
 
 export default function Rollnumber(
-  { defaultValue, onChange }: { defaultValue?: string, onChange: (number: number) => void }
+  { defaultValue, onChange }: { defaultValue?: Array<number>, onChange: (numbers: number[]) => void }
 ) {
 
   const [numbers, setNumbers] = useState<number[]>([0, 0, 0]);
 
-  // if default number was given, split it to array of numbers and set it to state
   useEffect(() => {
     if (defaultValue) {
-      const newNumbers = defaultValue.split('').map(n => parseInt(n))
-      setNumbers(newNumbers)
+      setNumbers(defaultValue)
     }
   }, [defaultValue])
 
@@ -50,7 +48,7 @@ export default function Rollnumber(
             throttleTimer = setTimeout(() => {
               setNumbers(newNumbers)
               if (onChange) {
-                onChange(parseInt(newNumbers.join('')))
+                onChange(newNumbers)
               }
             }, 600)
           }
@@ -86,9 +84,10 @@ export default function Rollnumber(
   console.log(numbers)
 
   return (
-    <div className="flex justify-center items-center">
-      <div className='rounded-lg bg-gray-900 p-1 flex'>
+    <div className="rollnumber flex justify-center items-center">
+      <div className='rounded-lg bg-gray-900 p-1 flex overflow-hidden'>
         {numberElements}
+        <div className="shadow rounded-lg"></div>
       </div>
     </div>
   )

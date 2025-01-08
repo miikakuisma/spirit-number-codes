@@ -17,7 +17,7 @@ export async function fetchReading(number: string) {
       {
         model: 'gpt-4o-mini',
         messages: [
-          { role: 'system', content: 'Give so called angel number reading of the given number' },
+          { role: 'system', content: 'Give angel number reading of a given number' },
           { role: 'user', content: number }
         ]
       },
