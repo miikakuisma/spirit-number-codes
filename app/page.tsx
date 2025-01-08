@@ -41,7 +41,7 @@ export default function Home() {
         {!reading && (
           <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 mb-4">
             {!loading && <Rollnumber
-              // defaultValue="147"
+              defaultValue={number?.toString() || '000'}
               onChange={number => setNumber(number)}
             />}
             <div className="flex justify-center mt-4">

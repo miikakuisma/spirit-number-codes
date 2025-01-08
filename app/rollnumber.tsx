@@ -83,6 +83,8 @@ export default function Rollnumber(
     return renderNumber(number, index)
   })
 
+  console.log(numbers)
+
   return (
     <div className="flex justify-center items-center">
       <div className='rounded-lg bg-gray-900 p-1 flex'>
