@@ -144,7 +144,7 @@ export default function Home() {
                     copyReading()
                   }}
                 >
-                  <ClipboardIcon />
+                  <ClipboardIcon width="32" height="32" />
                 </button>
                 {copied && <span className="text-white text-sm ml-3">Copied!</span>}
               </div>
@@ -195,7 +195,7 @@ export default function Home() {
                       copyAdvice()
                     }}
                   >
-                    <ClipboardIcon />
+                    <ClipboardIcon width="32" height="32" />
                   </button>
                   {copied && <span className="text-white text-sm ml-3">Copied!</span>}
                 </div>
