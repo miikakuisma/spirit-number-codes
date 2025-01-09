@@ -11,12 +11,11 @@ import Markdown from 'react-markdown'
 export default function Home() {
   const [loading, setLoading] = useState(false);
   const [reading, getReading] = useState<string | null>(null)
-  const [number, setNumber] = useState<Array<number>>([1, 1, 1])
+  const [number, setNumber] = useState<Array<number>>([1, 1])
   const [copied, setCopied] = useState(false)
 
   const handleSubmit = async () => {
     const numberString = number.join('')
-    console.log(numberString)
     setLoading(true)
     getReading(await fetchReading(numberString))
     setLoading(false)

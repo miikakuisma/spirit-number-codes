@@ -32,10 +32,12 @@
 }
 
 .number-container::-webkit-scrollbar {
+  width: 0px;
 	background: transparent;
 }
 
 .number-container::-webkit-scrollbar-thumb {
+  width: 0px;
 	opacity: 0;
 }
 

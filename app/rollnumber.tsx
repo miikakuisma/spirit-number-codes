@@ -7,7 +7,7 @@ export default function Rollnumber(
   { defaultValue, onChange }: { defaultValue?: Array<number>, onChange: (numbers: number[]) => void }
 ) {
 
-  const [numbers, setNumbers] = useState<number[]>([0, 0, 0]);
+  const [numbers, setNumbers] = useState<number[]>([0, 0]);
 
   useEffect(() => {
     if (defaultValue) {
@@ -16,6 +16,22 @@ export default function Rollnumber(
   }, [defaultValue])
 
   let throttleTimer: NodeJS.Timeout | null = null;
+
+  const addDigit = () => {
+    const newNumbers = [...numbers, numbers[numbers.length - 1]]
+    setNumbers(newNumbers)
+    if (onChange) {
+      onChange(newNumbers)
+    }
+  }
+
+  const removeDigit = () => {
+    const newNumbers = numbers.slice(0, numbers.length - 1)
+    setNumbers(newNumbers)
+    if (onChange) {
+      onChange(newNumbers)
+    }
+  }
 
   const renderNumber = (number: number, index: number) => {
     // scroll to selected number
@@ -60,19 +76,12 @@ export default function Rollnumber(
     return (
       <div
         key={index}
-        className={`number-container number-column-${index} bg-gray-900 text-6xl text-white`}
+        className={`number-container number-column-${index} bg-gray-900 text-6xl text-white overflow-y-scroll`}
         onScroll={handleScroll}
       >
-        <div className="num">0</div>
-        <div className="num">1</div>
-        <div className="num">2</div>
-        <div className="num">3</div>
-        <div className="num">4</div>
-        <div className="num">5</div>
-        <div className="num">6</div>
-        <div className="num">7</div>
-        <div className="num">8</div>
-        <div className="num">9</div>
+        {[...Array(10).keys()].map(num => (
+          <div key={num} className="num">{num}</div>
+        ))}
       </div>
     )
   }
@@ -82,11 +91,21 @@ export default function Rollnumber(
   })
 
   return (
-    <div className="rollnumber flex justify-center items-center">
-      <div className='rounded-lg bg-gray-900 p-1 flex overflow-hidden'>
-        {numberElements}
-        <div className="shadow rounded-lg"></div>
+    <div className='flex'>
+      {numbers.length > 1 && <button
+        className='text-3xl bg-gray-900 text-white p-2 rounded-lg hover:bg-gray-100 hover:text-black transition-colors w-[32px]'
+        onClick={removeDigit}
+      >-</button>}
+      <div className="rollnumber flex justify-center items-center">
+        <div className='rounded-lg bg-gray-900 p-1 flex overflow-hidden'>
+          {numberElements}
+          <div className="shadow rounded-lg"></div>
+        </div>
       </div>
+      {numbers.length <= 3 && <button
+        className='text-3xl bg-gray-900 text-white p-2 rounded-lg hover:bg-gray-100 hover:text-black transition-colors w-[32px]'
+        onClick={addDigit}
+      >+</button>}
     </div>
   )
 }
