@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { fetchReading, fetchAdvice, generateSpeech } from './data'
 import { Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/20/solid'
+import { ClipboardIcon } from '@heroicons/react/24/outline'
 import Rollnumber from './rollnumber';
 import Loading from './loading';
 import Markdown from 'react-markdown'
@@ -58,6 +59,7 @@ export default function Home() {
   }
 
   const handleSubmitQuestion = async () => {
+    if (!question) return
     const numberString = number.join('')
     setLoading(true)
     getAdvice(await fetchAdvice('I am constantly seeing number ' + numberString + ' and I also have this situation in my life: ' + question))
@@ -137,12 +139,12 @@ export default function Home() {
               <Markdown>{reading}</Markdown>
               <div className="flex justify-end items-center">
                 <button
-                  className={`flex items-center justify-center gap-5 w-[48px] h-[48px] self-start rounded-full ${copied ? 'bg-green-900' : 'bg-gray-900'} px-4 py-3 transition-colors hover:bg-gray-700 md:text-base`}
+                  className={`flex items-center justify-center gap-5 w-[48px] h-[48px] self-start rounded-full ${copied ? 'bg-green-900' : 'bg-gray-900'} px-3 py-3 transition-colors hover:bg-gray-700 md:text-base`}
                   onClick={() => {
                     copyReading()
                   }}
                 >
-                  <svg width="32" height="32" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" color="white" fill="currentcolor"><path d="M448 0H224C188.7 0 160 28.65 160 64v224c0 35.35 28.65 64 64 64h224c35.35 0 64-28.65 64-64V64C512 28.65 483.3 0 448 0zM464 288c0 8.822-7.178 16-16 16H224C215.2 304 208 296.8 208 288V64c0-8.822 7.178-16 16-16h224c8.822 0 16 7.178 16 16V288zM304 448c0 8.822-7.178 16-16 16H64c-8.822 0-16-7.178-16-16V224c0-8.822 7.178-16 16-16h64V160H64C28.65 160 0 188.7 0 224v224c0 35.35 28.65 64 64 64h224c35.35 0 64-28.65 64-64v-64h-48V448z"/></svg>
+                  <ClipboardIcon />
                 </button>
                 {copied && <span className="text-white text-sm ml-3">Copied!</span>}
               </div>
@@ -188,12 +190,12 @@ export default function Home() {
                 <Markdown>{advice}</Markdown>
                 <div className="flex justify-end items-center">
                   <button
-                    className={`flex items-center justify-center gap-5 w-[48px] h-[48px] self-start rounded-full ${copied ? 'bg-green-900' : 'bg-gray-900'} px-4 py-3 transition-colors hover:bg-gray-700 md:text-base`}
+                    className={`flex items-center justify-center gap-5 w-[48px] h-[48px] self-start rounded-full ${copied ? 'bg-green-900' : 'bg-gray-900'} px-3 py-3 transition-colors hover:bg-gray-700 md:text-base`}
                     onClick={() => {
                       copyAdvice()
                     }}
                   >
-                    <svg width="32" height="32" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" color="white" fill="currentcolor"><path d="M448 0H224C188.7 0 160 28.65 160 64v224c0 35.35 28.65 64 64 64h224c35.35 0 64-28.65 64-64V64C512 28.65 483.3 0 448 0zM464 288c0 8.822-7.178 16-16 16H224C215.2 304 208 296.8 208 288V64c0-8.822 7.178-16 16-16h224c8.822 0 16 7.178 16 16V288zM304 448c0 8.822-7.178 16-16 16H64c-8.822 0-16-7.178-16-16V224c0-8.822 7.178-16 16-16h64V160H64C28.65 160 0 188.7 0 224v224c0 35.35 28.65 64 64 64h224c35.35 0 64-28.65 64-64v-64h-48V448z"/></svg>
+                    <ClipboardIcon />
                   </button>
                   {copied && <span className="text-white text-sm ml-3">Copied!</span>}
                 </div>
@@ -204,6 +206,7 @@ export default function Home() {
               <button
                 onClick={() => {
                   getReading(null)
+                  getAdvice(null)
                 }}
                 className="inline-flex items-center rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
               >
